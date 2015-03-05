@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>星光灿烂的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="忧愁时就写一首诗 快乐时就唱一支歌">
+<meta property="og:type" content="website">
+<meta property="og:title" content="星光灿烂的博客">
+<meta property="og:url" content="http://raoxing.me/index.html">
+<meta property="og:site_name" content="星光灿烂的博客">
+<meta property="og:description" content="忧愁时就写一首诗 快乐时就唱一支歌">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="星光灿烂的博客">
+<meta name="twitter:description" content="忧愁时就写一首诗 快乐时就唱一支歌">
+  
+    <link rel="alternative" href="/atom.xml" title="星光灿烂的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">星光灿烂的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://raoxing.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-nodejs-学习笔记-一-path" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/03/05/nodejs-学习笔记-一-path/" class="article-date">
+  <time datetime="2015-03-05T13:46:19.000Z" itemprop="datePublished">2015-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/05/nodejs-学习笔记-一-path/">nodejs 学习笔记(一)path</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在项目中遇到问一个问题，就是想设置项目使用数据库路径为系统指定路径。由于自己的操作系统位Mac OSX，查看了一下<a href="https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html#//apple_ref/doc/uid/TP40010672-CH2-SW1" target="_blank" rel="external">Mac File System介绍</a>，自己做的app的数据（数据库tingodb）位置一般应该位于$HOME/Library/Application Support/APP_NAME目录下.</p>
+<p>那么问题来了，我在js代码中如何设置数据库的路径呢。</p>
+<p>直接设置  <code>path = &#39;~/Library/Application\ Support/APP_NAME/db&#39;</code>发现是不行的，<code>path = &#39;$HOME/Library/Application\ Support/APP_NAME/db&#39;</code>也同样不行。</p>
+<p>之后发现可以使用<a href="http://nodejs.org/api/path.html" target="_blank" rel="external">node path module</a> 进行路径的操作，如何找到user home path 仍然是个问题，在终端terminal 里面直接 <code>cd ~</code> 就可以了，但是在程序中如何得到呢。经过不懈努力<a href="http://stackoverflow.com/questions/9080085/node-js-find-home-directory-in-platform-agnostic-way" target="_blank" rel="external">查找,在这个答案中找到解决方案</a><br><code>var home = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;</code> 成功拿到 user home path 。 之后问题就应迎刃而解了。<br><code>path.join(home,&#39;/Library/Application\ Support/APP_NAME/db&#39;)</code>就设置成功。</p>
+<p>其他参考有用的资料：</p>
+<ol>
+<li><a href="http://stackoverflow.com/questions/10822574/difference-between-path-normalize-and-path-resolve-in-node-js" target="_blank" rel="external">nodejs path normalize 与 resolve的区别</a></li>
+<li><a href="https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1" target="_blank" rel="external">OSX Library Directory Details</a></li>
+<li><a href="http://www.chromium.org/user-experience/user-data-directory" target="_blank" rel="external">chromium user data directory</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/" data-id="ci6wbj66h0000s8q6c2ohaa4s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/nodejs/" style="font-size: NaNpx;">nodejs</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/03/05/nodejs-学习笔记-一-path/">nodejs 学习笔记(一)path</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Xing Rao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
