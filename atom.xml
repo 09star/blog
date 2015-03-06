@@ -82,7 +82,7 @@ fse.ensureDir(dest,function(err){
     <link href="http://raoxing.me/2015/03/06/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%B0%8F%E8%AE%B0/"/>
     <id>http://raoxing.me/2015/03/06/hexo搭建博客小记/</id>
     <published>2015-03-06T01:36:30.000Z</published>
-    <updated>2015-03-06T09:12:10.000Z</updated>
+    <updated>2015-03-06T09:28:15.000Z</updated>
     <content type="html"><![CDATA[<p>本文记录搭建hexo过程中的零零碎碎的事情，遇到的问题，留个参考。</p>
 <p>去年在老广的通知下，趁着github education活动获得了一堆优惠。<a href="https://www.namecheap.com/" target="_blank" rel="external">Namecheap</a> 申请了一个免费域名。<a href="https://www.digitalocean.com" target="_blank" rel="external">Digitial Ocean</a>搞到了几百美元的优惠。于是乎准备搞个Blog，逛了一圈，发现直接用<a href="https://pages.github.com/" target="_blank" rel="external">github pages</a> 托管静态资源这个解决方案不错，选用了<a href="http://hexo.io/" target="_blank" rel="external">Hexo Blog</a>框架。</p>
 <p>Blog搭起来之后就没管它。过完年回来，想想未完成的志事。决定还要坚持下去。发现hexo已经更新到3.0版本，按照网站指导<a href="https://github.com/hexojs/hexo/wiki/Migrating-from-2.x-to-3.0" target="_blank" rel="external">从2.X整合到3.0</a> 结果发现 _config.yml 被还原了，重新配置，部署安装终于搞定。</p>
@@ -90,6 +90,7 @@ fse.ensureDir(dest,function(err){
 <p>优化Blog配置方面，首先解决网页请求一些访问慢的静态资源，font 还有 jquery。参考这篇文章<a href="http://www.autonavi.me/2014/09/09/Hexo%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2.html" target="_blank" rel="external">HEXO个人博客速度优化</a> </p>
 <p>添加了<a href="duoshuo.com">多说评论</a></p>
 <p>添加了<a href="tongji.baidu.com">百度统计</a></p>
+<p>使用Google Anaalytics 登陆注册，之后添加要跟踪网站，获得跟踪代码，其实只需要知道 媒体跟踪ID  一般是UA-XXXX-Y 结尾。赋值给模板_config.yml 里面的google_analytics 即可。</p>
 <p>安装 sitemap插件</p>
 <p>Sitemap 可方便网站管理员通知搜索引擎他们网站上有哪些可供抓取的网页。最简单的 Sitemap 形式，就是XML 文件，在其中列出网站中的网址以及关于每个网址的其他元数据（上次更新的时间、更改的频率以及相对于网站上其他网址的重要程度为何等），以便搜索引擎可以更加智能地抓取网站。</p>
 <p>未完待续。</p>
