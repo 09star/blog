@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[星光灿烂的博客]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://raoxing.me/"/>
+  <updated>2015-03-06T08:19:24.000Z</updated>
+  <id>http://raoxing.me/</id>
+  
+  <author>
+    <name><![CDATA[Xing Rao]]></name>
+    <email><![CDATA[helloraoxing@163.com]]></email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[nodewebkit 打包发布程序]]></title>
+    <link href="http://raoxing.me/2015/03/06/nodewebkit-%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83%E7%A8%8B%E5%BA%8F/"/>
+    <id>http://raoxing.me/2015/03/06/nodewebkit-打包发布程序/</id>
+    <published>2015-03-06T07:27:07.000Z</published>
+    <updated>2015-03-06T08:19:24.000Z</updated>
+    <content type="html"><![CDATA[<p>用nodejs+express 开发完的程序，想使用node-webkit 现在已经改名nwjs打包进行发布。 </p>
+<h2 id="mac_osx">mac osx</h2><p>简单说就是把之前的程序代码，index.html，nw描述的package.json 文件打包为 app.nw 即：</p>
+<p><pre><br>    zip -r -q app.nw *<br></pre><br>之后把 app.nw (当然，为了方便节省时间，你也可以不用zip 只需要把上述文件放到名称为app.nw的文件夹中也是可以的)放到之前下载好的nodewebkit.app/Contents/Resources/ 文件夹下，这样点击 原来的nodewekit.app 就可以运行自己的打包的app.nw程序了，当然可以修改添加自己程序的icon及名称。</p>
+<p>直接发布 nodewebkit.app 就可以了</p>
+<h2 id="window">window</h2><p>待续…</p>
+<h3 id="参考链接">参考链接</h3><ol>
+<li><a href="https://github.com/nwjs/nw.js/wiki/How-to-package-and-distribute-your-apps" target="_blank" rel="external">nwjs github 主页How to package and distribute your apps</a></li>
+<li></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>用nodejs+express 开发完的程序，想使用node-webkit 现在已经改名nwjs打包进行发布。 </p>
+<h2 id="mac_osx">mac osx</h2><p>简单说就是把之前的程序代码，index.html，nw描述的package.json 文]]>
+    </summary>
+    
+      <category term="node-webkit" scheme="http://raoxing.me/tags/node-webkit/"/>
+    
+      <category term="nodejs" scheme="http://raoxing.me/tags/nodejs/"/>
+    
+      <category term="nwjs" scheme="http://raoxing.me/tags/nwjs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[nodejs 学习笔记(二)fs-extra module]]></title>
+    <link href="http://raoxing.me/2015/03/06/nodejs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-fs-extra-module/"/>
+    <id>http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/</id>
+    <published>2015-03-06T03:01:21.000Z</published>
+    <updated>2015-03-06T03:08:07.000Z</updated>
+    <content type="html"><![CDATA[<p>接上篇<a href="http://raoxing.me/2015/03/05/nodejs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80-path/" target="_blank" rel="external">nodejs 学习笔记(一)path</a> 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。</p>
+<p>查询之后,发现可以使用 <a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="external">node fs-extra</a> 来进行相应的操作</p>
+<pre>
+var fse = require('fs-extra');
+var dest = 'path/to/dir';
+
+fse.ensureDir(dest,function(err){
+    console.log(err);
+})
+</pre>
+
+
+
+
+<p>参考连接：</p>
+<ol>
+<li><a href="http://stackoverflow.com/questions/21194934/node-how-to-create-a-directory-if-doesnt-exist" target="_blank" rel="external">stackoverflow 问答</a></li>
+<li><a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="external">fs-extra</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>接上篇<a href="http://raoxing.me/2015/03/05/nodejs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80-path/" target="_blank" rel="external">node]]>
+    </summary>
+    
+      <category term="nodejs" scheme="http://raoxing.me/tags/nodejs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[hexo搭建博客小记]]></title>
+    <link href="http://raoxing.me/2015/03/06/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E5%B0%8F%E8%AE%B0/"/>
+    <id>http://raoxing.me/2015/03/06/hexo搭建博客小记/</id>
+    <published>2015-03-06T01:36:30.000Z</published>
+    <updated>2015-03-06T09:12:10.000Z</updated>
+    <content type="html"><![CDATA[<p>本文记录搭建hexo过程中的零零碎碎的事情，遇到的问题，留个参考。</p>
+<p>去年在老广的通知下，趁着github education活动获得了一堆优惠。<a href="https://www.namecheap.com/" target="_blank" rel="external">Namecheap</a> 申请了一个免费域名。<a href="https://www.digitalocean.com" target="_blank" rel="external">Digitial Ocean</a>搞到了几百美元的优惠。于是乎准备搞个Blog，逛了一圈，发现直接用<a href="https://pages.github.com/" target="_blank" rel="external">github pages</a> 托管静态资源这个解决方案不错，选用了<a href="http://hexo.io/" target="_blank" rel="external">Hexo Blog</a>框架。</p>
+<p>Blog搭起来之后就没管它。过完年回来，想想未完成的志事。决定还要坚持下去。发现hexo已经更新到3.0版本，按照网站指导<a href="https://github.com/hexojs/hexo/wiki/Migrating-from-2.x-to-3.0" target="_blank" rel="external">从2.X整合到3.0</a> 结果发现 _config.yml 被还原了，重新配置，部署安装终于搞定。</p>
+<p>Blog搭起来之后，无外乎两个方向，开始写，开始优化Blog配置。</p>
+<p>优化Blog配置方面，首先解决网页请求一些访问慢的静态资源，font 还有 jquery。参考这篇文章<a href="http://www.autonavi.me/2014/09/09/Hexo%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2.html" target="_blank" rel="external">HEXO个人博客速度优化</a> </p>
+<p>添加了<a href="duoshuo.com">多说评论</a></p>
+<p>添加了<a href="tongji.baidu.com">百度统计</a></p>
+<p>安装 sitemap插件</p>
+<p>Sitemap 可方便网站管理员通知搜索引擎他们网站上有哪些可供抓取的网页。最简单的 Sitemap 形式，就是XML 文件，在其中列出网站中的网址以及关于每个网址的其他元数据（上次更新的时间、更改的频率以及相对于网站上其他网址的重要程度为何等），以便搜索引擎可以更加智能地抓取网站。</p>
+<p>未完待续。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文记录搭建hexo过程中的零零碎碎的事情，遇到的问题，留个参考。</p>
+<p>去年在老广的通知下，趁着github education活动获得了一堆优惠。<a href="https://www.namecheap.com/" target="_blank" rel="]]>
+    </summary>
+    
+      <category term="hexo" scheme="http://raoxing.me/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[nodejs 学习笔记(一)path]]></title>
+    <link href="http://raoxing.me/2015/03/05/nodejs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80-path/"/>
+    <id>http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/</id>
+    <published>2015-03-05T13:46:19.000Z</published>
+    <updated>2015-03-05T14:38:26.000Z</updated>
+    <content type="html"><![CDATA[<p>今天在项目中遇到问一个问题，就是想设置项目使用数据库路径为系统指定路径。由于自己的操作系统位Mac OSX，查看了一下<a href="https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html#//apple_ref/doc/uid/TP40010672-CH2-SW1" target="_blank" rel="external">Mac File System介绍</a>，自己做的app的数据（数据库tingodb）位置一般应该位于$HOME/Library/Application Support/APP_NAME目录下.</p>
+<p>那么问题来了，我在js代码中如何设置数据库的路径呢。</p>
+<p>直接设置  <code>path = &#39;~/Library/Application\ Support/APP_NAME/db&#39;</code>发现是不行的，<code>path = &#39;$HOME/Library/Application\ Support/APP_NAME/db&#39;</code>也同样不行。</p>
+<p>之后发现可以使用<a href="http://nodejs.org/api/path.html" target="_blank" rel="external">node path module</a> 进行路径的操作，如何找到user home path 仍然是个问题，在终端terminal 里面直接 <code>cd ~</code> 就可以了，但是在程序中如何得到呢。经过不懈努力<a href="http://stackoverflow.com/questions/9080085/node-js-find-home-directory-in-platform-agnostic-way" target="_blank" rel="external">查找,在这个答案中找到解决方案</a><br><code>var home = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;</code> 成功拿到 user home path 。 之后问题就应迎刃而解了。<br><code>path.join(home,&#39;/Library/Application\ Support/APP_NAME/db&#39;)</code>就设置成功。</p>
+<p>其他参考有用的资料：</p>
+<ol>
+<li><a href="http://stackoverflow.com/questions/10822574/difference-between-path-normalize-and-path-resolve-in-node-js" target="_blank" rel="external">nodejs path normalize 与 resolve的区别</a></li>
+<li><a href="https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1" target="_blank" rel="external">OSX Library Directory Details</a></li>
+<li><a href="http://www.chromium.org/user-experience/user-data-directory" target="_blank" rel="external">chromium user data directory</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>今天在项目中遇到问一个问题，就是想设置项目使用数据库路径为系统指定路径。由于自己的操作系统位Mac OSX，查看了一下<a href="https://developer.apple.com/library/mac/documentation/FileManagement/]]>
+    </summary>
+    
+      <category term="nodejs" scheme="http://raoxing.me/tags/nodejs/"/>
+    
+  </entry>
+  
+</feed>
