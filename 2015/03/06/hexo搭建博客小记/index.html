@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>nodejs 学习笔记(一)path | 星光灿烂的博客</title>
+  <title>hexo搭建博客小记 | 星光灿烂的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天在项目中遇到问一个问题，就是想设置项目使用数据库路径为系统指定路径。由于自己的操作系统位Mac OSX，查看了一下Mac File System介绍，自己做的app的数据（数据库tingodb）位置一般应该位于$HOME/Library/Application Support/APP_NAME目录下.
-那么问题来了，我在js代码中如何设置数据库的路径呢。
-直接设置  path = &amp;#39;~">
+  <meta name="description" content="本文记录搭建hexo过程中的零零碎碎的事情，遇到的问题，留个参考。
+去年在老广的通知下，趁着github education活动获得了一堆优惠。Namecheap 申请了一个免费域名。Digitial Ocean搞到了几百美元的优惠。于是乎准备搞个Blog，逛了一圈，发现直接用github pages 托管静态资源这个解决方案不错，选用了Hexo Blog框架。
+Blog搭起来之后就没管它。过完年">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nodejs 学习笔记(一)path">
-<meta property="og:url" content="http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/index.html">
+<meta property="og:title" content="hexo搭建博客小记">
+<meta property="og:url" content="http://raoxing.me/2015/03/06/hexo搭建博客小记/index.html">
 <meta property="og:site_name" content="星光灿烂的博客">
-<meta property="og:description" content="今天在项目中遇到问一个问题，就是想设置项目使用数据库路径为系统指定路径。由于自己的操作系统位Mac OSX，查看了一下Mac File System介绍，自己做的app的数据（数据库tingodb）位置一般应该位于$HOME/Library/Application Support/APP_NAME目录下.
-那么问题来了，我在js代码中如何设置数据库的路径呢。
-直接设置  path = &amp;#39;~">
+<meta property="og:description" content="本文记录搭建hexo过程中的零零碎碎的事情，遇到的问题，留个参考。
+去年在老广的通知下，趁着github education活动获得了一堆优惠。Namecheap 申请了一个免费域名。Digitial Ocean搞到了几百美元的优惠。于是乎准备搞个Blog，逛了一圈，发现直接用github pages 托管静态资源这个解决方案不错，选用了Hexo Blog框架。
+Blog搭起来之后就没管它。过完年">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nodejs 学习笔记(一)path">
-<meta name="twitter:description" content="今天在项目中遇到问一个问题，就是想设置项目使用数据库路径为系统指定路径。由于自己的操作系统位Mac OSX，查看了一下Mac File System介绍，自己做的app的数据（数据库tingodb）位置一般应该位于$HOME/Library/Application Support/APP_NAME目录下.
-那么问题来了，我在js代码中如何设置数据库的路径呢。
-直接设置  path = &amp;#39;~">
+<meta name="twitter:title" content="hexo搭建博客小记">
+<meta name="twitter:description" content="本文记录搭建hexo过程中的零零碎碎的事情，遇到的问题，留个参考。
+去年在老广的通知下，趁着github education活动获得了一堆优惠。Namecheap 申请了一个免费域名。Digitial Ocean搞到了几百美元的优惠。于是乎准备搞个Blog，逛了一圈，发现直接用github pages 托管静态资源这个解决方案不错，选用了Hexo Blog框架。
+Blog搭起来之后就没管它。过完年">
   
     <link rel="alternative" href="/atom.xml" title="星光灿烂的博客" type="application/atom+xml">
   
@@ -77,10 +77,10 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-nodejs-学习笔记-一-path" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-hexo搭建博客小记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/03/05/nodejs-学习笔记-一-path/" class="article-date">
-  <time datetime="2015-03-05T13:46:19.000Z" itemprop="datePublished">2015-03-05</time>
+    <a href="/2015/03/06/hexo搭建博客小记/" class="article-date">
+  <time datetime="2015-03-06T01:36:30.000Z" itemprop="datePublished">2015-03-06</time>
 </a>
     
   </div>
@@ -91,7 +91,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      nodejs 学习笔记(一)path
+      hexo搭建博客小记
     </h1>
   
 
@@ -99,24 +99,22 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天在项目中遇到问一个问题，就是想设置项目使用数据库路径为系统指定路径。由于自己的操作系统位Mac OSX，查看了一下<a href="https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html#//apple_ref/doc/uid/TP40010672-CH2-SW1" target="_blank" rel="external">Mac File System介绍</a>，自己做的app的数据（数据库tingodb）位置一般应该位于$HOME/Library/Application Support/APP_NAME目录下.</p>
-<p>那么问题来了，我在js代码中如何设置数据库的路径呢。</p>
-<p>直接设置  <code>path = &#39;~/Library/Application\ Support/APP_NAME/db&#39;</code>发现是不行的，<code>path = &#39;$HOME/Library/Application\ Support/APP_NAME/db&#39;</code>也同样不行。</p>
-<p>之后发现可以使用<a href="http://nodejs.org/api/path.html" target="_blank" rel="external">node path module</a> 进行路径的操作，如何找到user home path 仍然是个问题，在终端terminal 里面直接 <code>cd ~</code> 就可以了，但是在程序中如何得到呢。经过不懈努力<a href="http://stackoverflow.com/questions/9080085/node-js-find-home-directory-in-platform-agnostic-way" target="_blank" rel="external">查找,在这个答案中找到解决方案</a><br><code>var home = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;</code> 成功拿到 user home path 。 之后问题就应迎刃而解了。<br><code>path.join(home,&#39;/Library/Application\ Support/APP_NAME/db&#39;)</code>就设置成功。</p>
-<p>其他参考有用的资料：</p>
-<ol>
-<li><a href="http://stackoverflow.com/questions/10822574/difference-between-path-normalize-and-path-resolve-in-node-js" target="_blank" rel="external">nodejs path normalize 与 resolve的区别</a></li>
-<li><a href="https://developer.apple.com/library/mac/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1" target="_blank" rel="external">OSX Library Directory Details</a></li>
-<li><a href="http://www.chromium.org/user-experience/user-data-directory" target="_blank" rel="external">chromium user data directory</a></li>
-</ol>
+        <p>本文记录搭建hexo过程中的零零碎碎的事情，遇到的问题，留个参考。</p>
+<p>去年在老广的通知下，趁着github education活动获得了一堆优惠。<a href="https://www.namecheap.com/" target="_blank" rel="external">Namecheap</a> 申请了一个免费域名。<a href="https://www.digitalocean.com" target="_blank" rel="external">Digitial Ocean</a>搞到了几百美元的优惠。于是乎准备搞个Blog，逛了一圈，发现直接用<a href="https://pages.github.com/" target="_blank" rel="external">github pages</a> 托管静态资源这个解决方案不错，选用了<a href="http://hexo.io/" target="_blank" rel="external">Hexo Blog</a>框架。</p>
+<p>Blog搭起来之后就没管它。过完年回来，想想未完成的志事。决定还要坚持下去。发现hexo已经更新到3.0版本，按照网站指导<a href="https://github.com/hexojs/hexo/wiki/Migrating-from-2.x-to-3.0" target="_blank" rel="external">从2.X整合到3.0</a> 结果发现 _config.yml 被还原了，重新配置，部署安装终于搞定。</p>
+<p>Blog搭起来之后，无外乎两个方向，开始写，开始优化Blog配置。</p>
+<p>优化Blog配置方面，首先解决网页请求一些访问慢的静态资源，font 还有 jquery。参考这篇文章<a href="http://www.autonavi.me/2014/09/09/Hexo%E5%8A%A0%E8%BD%BD%E8%BF%87%E6%85%A2.html" target="_blank" rel="external">HEXO个人博客速度优化</a> </p>
+<p>添加了<a href="duoshuo.com">多说评论</a></p>
+<p>添加了<a href="tongji.baidu.com">百度统计</a></p>
+<p>未完待续。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/" data-id="ci6wxgt6c00005rq63fqml6ni" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/06/hexo搭建博客小记/" data-id="ci6wxhoy000005sq69sxh9k5s" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
 
     </footer>
   </div>
@@ -124,15 +122,11 @@ var _hmt = _hmt || [];
     
 <nav id="article-nav">
   
-    <a href="/2015/03/06/hexo搭建博客小记/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          hexo搭建博客小记
-        
-      </div>
-    </a>
   
+    <a href="/2015/03/05/nodejs-学习笔记-一-path/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">nodejs 学习笔记(一)path</div>
+    </a>
   
 </nav>
 
@@ -142,7 +136,7 @@ var _hmt = _hmt || [];
  
   <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-nodejs-学习笔记-一-path" data-title="nodejs 学习笔记(一)path" data-url="http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/"></div>
+    <div class="ds-thread" data-thread-key="post-hexo搭建博客小记" data-title="hexo搭建博客小记" data-url="http://raoxing.me/2015/03/06/hexo搭建博客小记/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
