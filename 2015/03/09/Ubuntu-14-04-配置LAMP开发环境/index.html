@@ -3,17 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>星光灿烂的博客</title>
+  <title>Ubuntu 14.04 配置LAMP开发环境 | 星光灿烂的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="忧愁时就写一首诗 快乐时就唱一支歌">
-<meta property="og:type" content="website">
-<meta property="og:title" content="星光灿烂的博客">
-<meta property="og:url" content="http://raoxing.me/archives/2015/index.html">
+  <meta name="description" content="阿里云新手各种活动，领了好几张优惠劵，就开始0￥免费使用ECS服务器，同时使用优惠券开通了外网带宽。配置Ubuntu 14.04 64位，准备搭个LAMP环境玩耍一番。 
+登陆 直接使用ssh ssh root@ip_address登陆即可。
+安装参考这篇安装 就不细说了。
+之后在浏览器输入 公网 IP_ADDRESS，看到apache2的 Default Page 就表示apache安装成功
+遇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 14.04 配置LAMP开发环境">
+<meta property="og:url" content="http://raoxing.me/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/index.html">
 <meta property="og:site_name" content="星光灿烂的博客">
-<meta property="og:description" content="忧愁时就写一首诗 快乐时就唱一支歌">
+<meta property="og:description" content="阿里云新手各种活动，领了好几张优惠劵，就开始0￥免费使用ECS服务器，同时使用优惠券开通了外网带宽。配置Ubuntu 14.04 64位，准备搭个LAMP环境玩耍一番。 
+登陆 直接使用ssh ssh root@ip_address登陆即可。
+安装参考这篇安装 就不细说了。
+之后在浏览器输入 公网 IP_ADDRESS，看到apache2的 Default Page 就表示apache安装成功
+遇">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="星光灿烂的博客">
-<meta name="twitter:description" content="忧愁时就写一首诗 快乐时就唱一支歌">
+<meta name="twitter:title" content="Ubuntu 14.04 配置LAMP开发环境">
+<meta name="twitter:description" content="阿里云新手各种活动，领了好几张优惠劵，就开始0￥免费使用ECS服务器，同时使用优惠券开通了外网带宽。配置Ubuntu 14.04 64位，准备搭个LAMP环境玩耍一番。 
+登陆 直接使用ssh ssh root@ip_address登陆即可。
+安装参考这篇安装 就不细说了。
+之后在浏览器输入 公网 IP_ADDRESS，看到apache2的 Default Page 就表示apache安装成功
+遇">
   
     <link rel="alternative" href="/atom.xml" title="星光灿烂的博客" type="application/atom+xml">
   
@@ -88,116 +100,96 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/" class="archive-article-date">
-  <time datetime="2015-03-09T05:47:31.000Z" itemprop="datePublished">3月 9</time>
+        <section id="main"><article id="post-Ubuntu-14-04-配置LAMP开发环境" class="article article-type-post" itemscope itemprop="blogPost">
+ 
+  <div class="article-meta">
+    <a href="/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/" class="article-date">
+  <time datetime="2015-03-09T05:47:31.000Z" itemprop="datePublished">2015-03-09</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/">Ubuntu 14.04 配置LAMP开发环境</a>
+    <h1 class="article-title" itemprop="name">
+      Ubuntu 14.04 配置LAMP开发环境
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/03/06/nodewebkit-打包发布程序/" class="archive-article-date">
-  <time datetime="2015-03-06T07:27:07.000Z" itemprop="datePublished">3月 6</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
+        <p>阿里云新手各种活动，领了好几张优惠劵，就开始0￥免费使用ECS服务器，同时使用优惠券开通了外网带宽。配置Ubuntu 14.04 64位，准备搭个LAMP环境玩耍一番。 </p>
+<h2 id="登陆">登陆</h2><p> 直接使用ssh <code>ssh root@ip_address</code>登陆即可。</p>
+<h2 id="安装">安装</h2><p><a href="http://blog.csdn.net/tecn14/article/details/27515241" target="_blank" rel="external">参考这篇安装</a> 就不细说了。</p>
+<p>之后在浏览器输入 公网 IP_ADDRESS，看到apache2的 Default Page 就表示apache安装成功</p>
+<h2 id="遇到的问题">遇到的问题</h2><p>之后访问phpAdmin 出现错误 ： The json extension is missing. Please check your PHP configuration.</p>
+<p>查询一下发现只需要前往 <code>/etc/php5/mods-available/json.ini</code> 把 <code>priority=20</code> 注释去掉，重启服务<code>service apache2 restart</code></p>
+<h3 id="vim基本操作">vim基本操作</h3><p>按Esc 输入:help 查看帮助文档</p>
+<ol>
+<li>按Esc 之后输入 :q! 直接退出 不保存  </li>
+<li>按Esc 之后输入 :wq 保存并退出 不保存 </li>
+</ol>
+<h2 id="其他参考">其他参考</h2><ol>
+<li><a href="http://en.wikipedia.org/wiki/LAMP_(software_bundle)" target="_blank" rel="external">LAMP</a></li>
+<li><a href="http://superuser.com/questions/639945/how-to-fix-the-phpmyadmin-error-json-extension-is-missing" target="_blank" rel="external">The json extension is missing错误解决</a></li>
+<li><a href="http://stackoverflow.com/questions/11828270/how-to-exit-the-vim-editor" target="_blank" rel="external">how-to-exit-the-vim-editor</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://raoxing.me/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/" data-id="ci71ipq26000e3iq6rjdx4ulw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LAMP/">LAMP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/03/06/nodewebkit-打包发布程序/">nodewebkit 打包发布程序</a>
-    </h1>
+    
+<nav id="article-nav" style='margin:10px 0px'>
+  
+  
+    <a href="/2015/03/06/nodewebkit-打包发布程序/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      nodewebkit 打包发布程序
+    </a>
+  
+</nav>
+
   
 
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" class="archive-article-date">
-  <time datetime="2015-03-06T03:01:21.000Z" itemprop="datePublished">3月 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/03/06/nodejs-学习笔记-二-fs-extra-module/">nodejs 学习笔记(二)fs-extra module</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/03/06/hexo搭建博客小记/" class="archive-article-date">
-  <time datetime="2015-03-06T01:36:30.000Z" itemprop="datePublished">3月 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/03/06/hexo搭建博客小记/">hexo搭建博客小记</a>
-    </h1>
+  <section id="comments" style='margin-top:10px'>
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Ubuntu-14-04-配置LAMP开发环境" data-title="Ubuntu 14.04 配置LAMP开发环境" data-url="http://raoxing.me/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'raoxing'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
   
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2015/03/05/nodejs-学习笔记-一-path/" class="archive-article-date">
-  <time datetime="2015-03-05T13:46:19.000Z" itemprop="datePublished">3月 5</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/03/05/nodejs-学习笔记-一-path/">nodejs 学习笔记(一)path</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-</section>
+ </section>
         
           <aside id="sidebar">
   
