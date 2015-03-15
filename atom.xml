@@ -4,7 +4,7 @@
   <subtitle><![CDATA[忧愁时就写一首诗 快乐时就唱一支歌]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://raoxing.me/"/>
-  <updated>2015-03-09T06:58:20.000Z</updated>
+  <updated>2015-03-13T10:11:32.000Z</updated>
   <id>http://raoxing.me/</id>
   
   <author>
@@ -13,6 +13,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[mac php开发工具及环境配置]]></title>
+    <link href="http://raoxing.me/2015/03/10/mac-php%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>http://raoxing.me/2015/03/10/mac-php开发工具及环境配置/</id>
+    <published>2015-03-10T03:15:43.000Z</published>
+    <updated>2015-03-13T10:11:32.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="安装MAMP环境">安装MAMP环境</h2><p>安装<a href="http://www.mamp.info/en/downloads/" target="_blank" rel="external">MAMP</a>开发环境，一键安装install Apache 2, current PHP and MySQL. </p>
+<h2 id="安装phpstorm">安装phpstorm</h2><p>从<a href="https://www.jetbrains.com/phpstorm/index.html" target="_blank" rel="external">jetBrains官网</a>官网直接下载phpstorm安装。</p>
+<h2 id="从svn加载项目">从svn加载项目</h2><p>之后从svn加载工程，发现一致报错  <code>Received fatal alert: handshake_failure Please check Subversion SSL settings (Settings | Version Control | Subversion | Network) Maybe you should specify SSL protocol manually - SSLv3 or TLSv1</code></p>
+<p>最后经过查询找到了解决方案</p>
+<pre>
+
+1.- Go to Preferences > Project settings > Version Control > Subversion
+2.- In network tab, select TLSv1
+3.- In general tab, click "Clear auth cache" and it will ask you again the credentials for the svn repositories.
+4.- restart phpstorm
+</pre>
+
+<h2 id="安装ecshop">安装ecshop</h2><p>把ecshop项目加载到phpstorm，进行运行配置，配置apache 服务器地址，项目路径，运行。 在浏览器输入URL ，会看到ecshop项目初始化install的配置导航，点击下一步，之后设置数据库，后台admin的账户，点击完成，即可看到ecshop默认的商城页面了。</p>
+<p>当然可能会遇到php报错的问题，</p>
+<p>参考文献：</p>
+<ol>
+<li><a href="https://confluence.jetbrains.com/display/PhpStorm/Installing+and+Configuring+MAMP+with+PhpStorm+IDE" target="_blank" rel="external">配置环境</a></li>
+<li><a href="http://intellij27.rssing.com/browser.php?indx=4975062&amp;item=3399" target="_blank" rel="external">解决svn错误</a></li>
+<li><a href="http://www.cnblogs.com/heiniuhaha/archive/2011/11/11/2245594.html" target="_blank" rel="external">svn 命令更新</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="安装MAMP环境">安装MAMP环境</h2><p>安装<a href="http://www.mamp.info/en/downloads/" target="_blank" rel="external">MAMP</a>开发环境，一键安装install Apa]]>
+    </summary>
+    
+      <category term="mamp" scheme="http://raoxing.me/tags/mamp/"/>
+    
+      <category term="php" scheme="http://raoxing.me/tags/php/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Ubuntu 14.04 配置LAMP开发环境]]></title>
