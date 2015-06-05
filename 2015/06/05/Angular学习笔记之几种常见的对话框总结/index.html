@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Angular学习笔记之几种常见的对话框总结 | 星光灿烂的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="接触学习Angular这么长时间，项目里面经常碰到会使用弹出对话框（Modal或者Dialog）用起来简单使用，适合对象的创建，修改和提醒等操作。
+1 UI Bootstrap 的modalUI Bootstrap 是AngularUI Team 用AngularJS 编写的 Bootstrap components. 所以常见的 bootstrap 组件都可以尝试在 UI Bootstrap中寻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular学习笔记之几种常见的对话框总结">
+<meta property="og:url" content="http://raoxing.me/2015/06/05/Angular学习笔记之几种常见的对话框总结/index.html">
+<meta property="og:site_name" content="星光灿烂的博客">
+<meta property="og:description" content="接触学习Angular这么长时间，项目里面经常碰到会使用弹出对话框（Modal或者Dialog）用起来简单使用，适合对象的创建，修改和提醒等操作。
+1 UI Bootstrap 的modalUI Bootstrap 是AngularUI Team 用AngularJS 编写的 Bootstrap components. 所以常见的 bootstrap 组件都可以尝试在 UI Bootstrap中寻">
+<meta property="og:image" content="/2015/06/05/Angular学习笔记之几种常见的对话框总结/uiBootstrapModal.png">
+<meta property="og:image" content="/2015/06/05/Angular学习笔记之几种常见的对话框总结/mdDialog.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular学习笔记之几种常见的对话框总结">
+<meta name="twitter:description" content="接触学习Angular这么长时间，项目里面经常碰到会使用弹出对话框（Modal或者Dialog）用起来简单使用，适合对象的创建，修改和提醒等操作。
+1 UI Bootstrap 的modalUI Bootstrap 是AngularUI Team 用AngularJS 编写的 Bootstrap components. 所以常见的 bootstrap 组件都可以尝试在 UI Bootstrap中寻">
+  
+    <link rel="alternative" href="/atom.xml" title="星光灿烂的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-57209755-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?f59920835496b990a91bfd0f0f889522";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">星光灿烂的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">忧愁时就写一首诗 快乐时就唱一支歌</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="q" value="site:http://raoxing.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Angular学习笔记之几种常见的对话框总结" class="article article-type-post" itemscope itemprop="blogPost">
+ 
+  <div class="article-meta">
+    <a href="/2015/06/05/Angular学习笔记之几种常见的对话框总结/" class="article-date">
+  <time datetime="2015-06-05T07:43:12.000Z" itemprop="datePublished">2015-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Angular学习笔记之几种常见的对话框总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接触学习Angular这么长时间，项目里面经常碰到会使用弹出对话框（Modal或者Dialog）用起来简单使用，适合对象的创建，修改和提醒等操作。</p>
+<h2 id="1_UI_Bootstrap_的modal">1 UI Bootstrap 的modal</h2><p><a href="https://angular-ui.github.io/bootstrap/" target="_blank" rel="external">UI Bootstrap</a> 是AngularUI Team 用AngularJS 编写的 Bootstrap components. 所以常见的 bootstrap 组件都可以尝试在 UI Bootstrap中寻找.<br>大概样子如此。<br><img src="/2015/06/05/Angular学习笔记之几种常见的对话框总结/uiBootstrapModal.png"></p>
+<p>由于项目中会用到多个对话框，通常是使用angular 事件机制($broadcast/$on)来触发modal 的展示。所以一般架构是，view层，专门有个总的dialog.ejs(后台使用nodejs开发)里面以ng-template形式存储多个dialog</p>
+<figure class="highlight erb"><figcaption><span>[html]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/ng-template"</span> <span class="attribute">id</span>=<span class="value">"dialog.XXXDialog"</span>&gt;</span><span class="javascript"></span><br><span class="line">    </span></span>&lt;%<span class="ruby"><span class="keyword">include</span> dialog.<span class="constant">XXXDialog</span>.ejs</span>%&gt;<span class="xml"><span class="javascript"></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/ng-template"</span> <span class="attribute">id</span>=<span class="value">"dialog.XXXDialog"</span>&gt;</span><span class="javascript"></span><br><span class="line">    </span></span>&lt;%<span class="ruby"><span class="keyword">include</span> dialog.<span class="constant">XXXDialog</span>.ejs</span>%&gt;<span class="xml"><span class="javascript"></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>同理，controller层，专门有dialogController 来负责监听($on)所有modal事件。 具体触发事件只需要使用$rootScope.$broadcast(“event<em>name”) 总的控制controller 内容如下：<br><figure class="highlight r"><figcaption><span>[javascript]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">"dialogController"</span>,[<span class="keyword">function</span>(<span class="keyword">...</span>)&#123;</span><br><span class="line">    $scope.$on(<span class="string">"new.friend"</span>,<span class="keyword">function</span>(event)&#123;</span><br><span class="line">    var modalInstance = $modal.open(&#123;</span><br><span class="line">        backdrop:<span class="string">'static'</span>,</span><br><span class="line">        templateUrl:<span class="string">'dialog.XXXDialog'</span>,// dialog.ejs 里面模板id</span><br><span class="line">        controller :<span class="string">"dialog.XXXController"</span>,//对应具体modal的controller</span><br><span class="line">        windowClass:<span class="string">"colored-header"</span>,</span><br><span class="line">        resolve : &#123; // 通过resolve 来向具体XXXController注入数据service</span><br><span class="line">            yourService:<span class="keyword">function</span>()&#123;</span><br><span class="line">                <span class="keyword">return</span> XXX ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 其他字段参考官网</span><br><span class="line">&#125;)</span><br><span class="line">&#125;)</span><br><span class="line">$scope.$on(<span class="keyword">...</span>) // 其他的触发modal 的事件</span><br><span class="line">    &#125;])</span><br></pre></td></tr></table></figure><br>具体的每个modal 的处理逻辑只需要写在相应的 controller里面即可。<br><em>_记得不要忘记</em></em>把相关的模板以及js文件 include到 页面中。</p>
+<h2 id="2_angular-strap_的modal">2 angular-strap 的modal</h2><p>[AngularStrap] 是另一套为AngularJS写的Bootstrap Directives。有一些指令还是比较炫酷好看的。由于modal service名称冲突，angular-strap 里面的modal不能和ui-bootstrap 的modal一起使用。<br>使用时先引入相应的module<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.<span class="keyword">module</span>(<span class="symbol">'myApp'</span>, [<span class="symbol">'mgcrea</span>.ngStrap']);</span><br></pre></td></tr></table></figure><br>个人感觉angular-strap 实现的modal service 不是太好，Modal show 的时候，在DOM生成是以兄弟节点的形式在触发Button后面插入，这样CSS样式会受到相应父节点的影响。<br>同时 modal.$hide()不提供 promise服务，无法知道$hide完整 remove的事件从而导致<a href="https://github.com/mgcrea/angular-strap/issues/864" target="_blank" rel="external">一些样式问题</a><br>。同时没有提供resolve 接口可以注入数据，所以几次使用都是直接使用继承触发modal时button所在的Controller $scope</p>
+<h2 id="3_angular_material_中的_dialog">3 angular material 中的 dialog</h2><p><a href="https://material.angularjs.org/latest/#/" target="_blank" rel="external">Angular Material</a> 使用angularjs实现的基于google material design的样式组件。也是最近才发现接触的，感觉做的更是炫酷。提供$mdDialog service 效果如下：<br><img src="/2015/06/05/Angular学习笔记之几种常见的对话框总结/mdDialog.png"><br>使用起来和ui-bootstrap modal 相似，同时可以和ui-bootstrap的 modal共同使用。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 记得在相应dialog.ejs 里面添加 ng-<span class="keyword">template</span> : dialog.<span class="type">XXXDialog</span></span><br><span class="line">// 以及生成新的 dialog.<span class="type">XXXDialogController</span></span><br><span class="line">$mdDialog.show(&#123;</span><br><span class="line">    controller: 'dialog.<span class="type">XXXDialogController</span>',</span><br><span class="line">    templateUrl: 'dialog.<span class="type">XXXDialog</span>',</span><br><span class="line">    clickOutsideToClose: <span class="literal">true</span> ,</span><br><span class="line">    resolve : &#123;</span><br><span class="line">        dataService : function()&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="type">XXX</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>先写这些，很是零碎。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://raoxing.me/2015/06/05/Angular学习笔记之几种常见的对话框总结/" data-id="ciajb8lmc000043q68tarbxnq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJs/">AngularJs</a></li></ul>
+
+    </footer>
+  </div>
+
+  
+    
+<nav id="article-nav" style='margin:10px 0px'>
+  
+  
+    <a href="/2015/03/10/mac-php开发工具及环境配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      mac php开发工具及环境配置
+    </a>
+  
+</nav>
+
+  
+
+  
+  <section id="comments" style='margin-top:10px'>
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Angular学习笔记之几种常见的对话框总结" data-title="Angular学习笔记之几种常见的对话框总结" data-url="http://raoxing.me/2015/06/05/Angular学习笔记之几种常见的对话框总结/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'raoxing'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+
+  
+</article>
+
+ </section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/">LAMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mamp/">mamp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-webkit/">node-webkit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nwjs/">nwjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a><a href="/tags/LAMP/" style="font-size: 10px;">LAMP</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/mamp/" style="font-size: 10px;">mamp</a><a href="/tags/node-webkit/" style="font-size: 10px;">node-webkit</a><a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a><a href="/tags/nwjs/" style="font-size: 10px;">nwjs</a><a href="/tags/php/" style="font-size: 10px;">php</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/06/05/Angular学习笔记之几种常见的对话框总结/">Angular学习笔记之几种常见的对话框总结</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/10/mac-php开发工具及环境配置/">mac php开发工具及环境配置</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/">Ubuntu 14.04 配置LAMP开发环境</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/06/nodewebkit-打包发布程序/">nodewebkit 打包发布程序</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/06/nodejs-学习笔记-二-fs-extra-module/">nodejs 学习笔记(二)fs-extra module</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Xing Rao<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

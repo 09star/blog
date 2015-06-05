@@ -90,6 +90,59 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-Angular学习笔记之几种常见的对话框总结" class="article article-type-post" itemscope itemprop="blogPost">
+ 
+  <div class="article-meta">
+    <a href="/2015/06/05/Angular学习笔记之几种常见的对话框总结/" class="article-date">
+  <time datetime="2015-06-05T07:43:12.000Z" itemprop="datePublished">2015-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/05/Angular学习笔记之几种常见的对话框总结/">Angular学习笔记之几种常见的对话框总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接触学习Angular这么长时间，项目里面经常碰到会使用弹出对话框（Modal或者Dialog）用起来简单使用，适合对象的创建，修改和提醒等操作。</p>
+<h2 id="1_UI_Bootstrap_的modal">1 UI Bootstrap 的modal</h2><p><a href="https://angular-ui.github.io/bootstrap/" target="_blank" rel="external">UI Bootstrap</a> 是AngularUI Team 用AngularJS 编写的 Bootstrap components. 所以常见的 bootstrap 组件都可以尝试在 UI Bootstrap中寻找.<br>大概样子如此。<br><img src="/2015/06/05/Angular学习笔记之几种常见的对话框总结/uiBootstrapModal.png"></p>
+<p>由于项目中会用到多个对话框，通常是使用angular 事件机制($broadcast/$on)来触发modal 的展示。所以一般架构是，view层，专门有个总的dialog.ejs(后台使用nodejs开发)里面以ng-template形式存储多个dialog</p>
+<figure class="highlight erb"><figcaption><span>[html]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/ng-template"</span> <span class="attribute">id</span>=<span class="value">"dialog.XXXDialog"</span>&gt;</span><span class="javascript"></span><br><span class="line">    </span></span>&lt;%<span class="ruby"><span class="keyword">include</span> dialog.<span class="constant">XXXDialog</span>.ejs</span>%&gt;<span class="xml"><span class="javascript"></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/ng-template"</span> <span class="attribute">id</span>=<span class="value">"dialog.XXXDialog"</span>&gt;</span><span class="javascript"></span><br><span class="line">    </span></span>&lt;%<span class="ruby"><span class="keyword">include</span> dialog.<span class="constant">XXXDialog</span>.ejs</span>%&gt;<span class="xml"><span class="javascript"></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>同理，controller层，专门有dialogController 来负责监听($on)所有modal事件。 具体触发事件只需要使用$rootScope.$broadcast(“event<em>name”) 总的控制controller 内容如下：<br><figure class="highlight r"><figcaption><span>[javascript]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">app.controller(<span class="string">"dialogController"</span>,[<span class="keyword">function</span>(<span class="keyword">...</span>)&#123;</span><br><span class="line">    $scope.$on(<span class="string">"new.friend"</span>,<span class="keyword">function</span>(event)&#123;</span><br><span class="line">    var modalInstance = $modal.open(&#123;</span><br><span class="line">        backdrop:<span class="string">'static'</span>,</span><br><span class="line">        templateUrl:<span class="string">'dialog.XXXDialog'</span>,// dialog.ejs 里面模板id</span><br><span class="line">        controller :<span class="string">"dialog.XXXController"</span>,//对应具体modal的controller</span><br><span class="line">        windowClass:<span class="string">"colored-header"</span>,</span><br><span class="line">        resolve : &#123; // 通过resolve 来向具体XXXController注入数据service</span><br><span class="line">            yourService:<span class="keyword">function</span>()&#123;</span><br><span class="line">                <span class="keyword">return</span> XXX ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 其他字段参考官网</span><br><span class="line">&#125;)</span><br><span class="line">&#125;)</span><br><span class="line">$scope.$on(<span class="keyword">...</span>) // 其他的触发modal 的事件</span><br><span class="line">    &#125;])</span><br></pre></td></tr></table></figure><br>具体的每个modal 的处理逻辑只需要写在相应的 controller里面即可。<br><em>_记得不要忘记</em></em>把相关的模板以及js文件 include到 页面中。</p>
+<h2 id="2_angular-strap_的modal">2 angular-strap 的modal</h2><p>[AngularStrap] 是另一套为AngularJS写的Bootstrap Directives。有一些指令还是比较炫酷好看的。由于modal service名称冲突，angular-strap 里面的modal不能和ui-bootstrap 的modal一起使用。<br>使用时先引入相应的module<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.<span class="keyword">module</span>(<span class="symbol">'myApp'</span>, [<span class="symbol">'mgcrea</span>.ngStrap']);</span><br></pre></td></tr></table></figure><br>个人感觉angular-strap 实现的modal service 不是太好，Modal show 的时候，在DOM生成是以兄弟节点的形式在触发Button后面插入，这样CSS样式会受到相应父节点的影响。<br>同时 modal.$hide()不提供 promise服务，无法知道$hide完整 remove的事件从而导致<a href="https://github.com/mgcrea/angular-strap/issues/864" target="_blank" rel="external">一些样式问题</a><br>。同时没有提供resolve 接口可以注入数据，所以几次使用都是直接使用继承触发modal时button所在的Controller $scope</p>
+<h2 id="3_angular_material_中的_dialog">3 angular material 中的 dialog</h2><p><a href="https://material.angularjs.org/latest/#/" target="_blank" rel="external">Angular Material</a> 使用angularjs实现的基于google material design的样式组件。也是最近才发现接触的，感觉做的更是炫酷。提供$mdDialog service 效果如下：<br><img src="/2015/06/05/Angular学习笔记之几种常见的对话框总结/mdDialog.png"><br>使用起来和ui-bootstrap modal 相似，同时可以和ui-bootstrap的 modal共同使用。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 记得在相应dialog.ejs 里面添加 ng-<span class="keyword">template</span> : dialog.<span class="type">XXXDialog</span></span><br><span class="line">// 以及生成新的 dialog.<span class="type">XXXDialogController</span></span><br><span class="line">$mdDialog.show(&#123;</span><br><span class="line">    controller: 'dialog.<span class="type">XXXDialogController</span>',</span><br><span class="line">    templateUrl: 'dialog.<span class="type">XXXDialog</span>',</span><br><span class="line">    clickOutsideToClose: <span class="literal">true</span> ,</span><br><span class="line">    resolve : &#123;</span><br><span class="line">        dataService : function()&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="type">XXX</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>先写这些，很是零碎。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://raoxing.me/2015/06/05/Angular学习笔记之几种常见的对话框总结/" data-id="ciajb8lmc000043q68tarbxnq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJs/">AngularJs</a></li></ul>
+
+    </footer>
+  </div>
+
+  
+
+  
+
+  
+</article>
+
+ 
+  
     <article id="post-mac-php开发工具及环境配置" class="article article-type-post" itemscope itemprop="blogPost">
  
   <div class="article-meta">
@@ -137,7 +190,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/10/mac-php开发工具及环境配置/" data-id="ci7c05z3w000e2xq6bgnpyrob" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/10/mac-php开发工具及环境配置/" data-id="ciajb83ab000e42q6h63wvh1k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mamp/">mamp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
@@ -197,7 +250,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/" data-id="ci7c05z3y000j2xq62ihltoap" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/" data-id="ciajb83ag000j42q6nnudtsem" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LAMP/">LAMP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -250,7 +303,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/06/nodewebkit-打包发布程序/" data-id="ci7c05z2w00002xq6rmvnvm33" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/06/nodewebkit-打包发布程序/" data-id="ciajb839b000042q68k3mgv5k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-webkit/">node-webkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nwjs/">nwjs</a></li></ul>
@@ -313,7 +366,7 @@ fse.ensureDir(dest,function(err){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" data-id="ci7c05z3m00072xq6ctr9cnra" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" data-id="ciajb839w000742q6yck4uybd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -371,7 +424,7 @@ fse.ensureDir(dest,function(err){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/06/hexo搭建博客小记/" data-id="ci7c05z3u000b2xq6gt5scilo" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/06/hexo搭建博客小记/" data-id="ciajb83a2000b42q6jnm3gs60" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -425,7 +478,7 @@ fse.ensureDir(dest,function(err){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/" data-id="ci7c05z3s00092xq6wjpwz7hw" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/" data-id="ciajb839z000942q6zmb15xjf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -453,7 +506,7 @@ fse.ensureDir(dest,function(err){
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/">LAMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mamp/">mamp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-webkit/">node-webkit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nwjs/">nwjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/">LAMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mamp/">mamp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-webkit/">node-webkit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nwjs/">nwjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -462,7 +515,7 @@ fse.ensureDir(dest,function(err){
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/LAMP/" style="font-size: 10px;">LAMP</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/mamp/" style="font-size: 10px;">mamp</a><a href="/tags/node-webkit/" style="font-size: 10px;">node-webkit</a><a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a><a href="/tags/nwjs/" style="font-size: 10px;">nwjs</a><a href="/tags/php/" style="font-size: 10px;">php</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a><a href="/tags/LAMP/" style="font-size: 10px;">LAMP</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/mamp/" style="font-size: 10px;">mamp</a><a href="/tags/node-webkit/" style="font-size: 10px;">node-webkit</a><a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a><a href="/tags/nwjs/" style="font-size: 10px;">nwjs</a><a href="/tags/php/" style="font-size: 10px;">php</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
     </div>
   </div>
 
@@ -471,7 +524,7 @@ fse.ensureDir(dest,function(err){
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -481,6 +534,10 @@ fse.ensureDir(dest,function(err){
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/06/05/Angular学习笔记之几种常见的对话框总结/">Angular学习笔记之几种常见的对话框总结</a>
+          </li>
         
           <li>
             <a href="/2015/03/10/mac-php开发工具及环境配置/">mac php开发工具及环境配置</a>
@@ -496,10 +553,6 @@ fse.ensureDir(dest,function(err){
         
           <li>
             <a href="/2015/03/06/nodejs-学习笔记-二-fs-extra-module/">nodejs 学习笔记(二)fs-extra module</a>
-          </li>
-        
-          <li>
-            <a href="/2015/03/06/hexo搭建博客小记/">hexo搭建博客小记</a>
           </li>
         
       </ul>
