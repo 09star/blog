@@ -3,38 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>nodejs 学习笔记(二)fs-extra module | 星光灿烂的博客</title>
+  <title>星光灿烂的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="接上篇nodejs 学习笔记(一)path 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。
-查询之后,发现可以使用 node fs-extra 来进行相应的操作
-
-var fse = require(&apos;fs-extra&apos;);
-var dest = &apos;path/to/dir&apos;;
-
-fse.ensureDir(dest,function(err){
-    co">
-<meta property="og:type" content="article">
-<meta property="og:title" content="nodejs 学习笔记(二)fs-extra module">
-<meta property="og:url" content="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/index.html">
+  <meta name="description" content="忧愁时就写一首诗 快乐时就唱一支歌">
+<meta property="og:type" content="website">
+<meta property="og:title" content="星光灿烂的博客">
+<meta property="og:url" content="http://raoxing.me/tags/OpenCV/index.html">
 <meta property="og:site_name" content="星光灿烂的博客">
-<meta property="og:description" content="接上篇nodejs 学习笔记(一)path 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。
-查询之后,发现可以使用 node fs-extra 来进行相应的操作
-
-var fse = require(&apos;fs-extra&apos;);
-var dest = &apos;path/to/dir&apos;;
-
-fse.ensureDir(dest,function(err){
-    co">
+<meta property="og:description" content="忧愁时就写一首诗 快乐时就唱一支歌">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nodejs 学习笔记(二)fs-extra module">
-<meta name="twitter:description" content="接上篇nodejs 学习笔记(一)path 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。
-查询之后,发现可以使用 node fs-extra 来进行相应的操作
-
-var fse = require(&apos;fs-extra&apos;);
-var dest = &apos;path/to/dir&apos;;
-
-fse.ensureDir(dest,function(err){
-    co">
+<meta name="twitter:title" content="星光灿烂的博客">
+<meta name="twitter:description" content="忧愁时就写一首诗 快乐时就唱一支歌">
   
     <link rel="alternative" href="/atom.xml" title="星光灿烂的博客" type="application/atom+xml">
   
@@ -109,107 +88,40 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-nodejs-学习笔记-二-fs-extra-module" class="article article-type-post" itemscope itemprop="blogPost">
- 
-  <div class="article-meta">
-    <a href="/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" class="article-date">
-  <time datetime="2015-03-06T03:01:21.000Z" itemprop="datePublished">2015-03-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      nodejs 学习笔记(二)fs-extra module
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2015/06/06/MacOs-搭建-OpenCv环境/" class="archive-article-date">
+  <time datetime="2015-06-05T16:00:00.000Z" itemprop="datePublished">6月 6</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/06/06/MacOs-搭建-OpenCv环境/">MacOS 搭建 OpenCV环境</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>接上篇<a href="http://raoxing.me/2015/03/05/nodejs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80-path/" target="_blank" rel="external">nodejs 学习笔记(一)path</a> 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。</p>
-<p>查询之后,发现可以使用 <a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="external">node fs-extra</a> 来进行相应的操作</p>
-<pre>
-var fse = require('fs-extra');
-var dest = 'path/to/dir';
-
-fse.ensureDir(dest,function(err){
-    console.log(err);
-})
-</pre>
-
-
-
-
-<p>参考连接：</p>
-<ol>
-<li><a href="http://stackoverflow.com/questions/21194934/node-how-to-create-a-directory-if-doesnt-exist" target="_blank" rel="external">stackoverflow 问答</a></li>
-<li><a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="external">fs-extra</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" data-id="ciakhxhx90007vzq63ke9mqmg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-
-  
-    
-<nav id="article-nav" style='margin:10px 0px'>
-  
-    <a href="/2015/03/06/nodewebkit-打包发布程序/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      
-        
-          nodewebkit 打包发布程序
-        
-    </a>
-  
-  
-    <a href="/2015/03/06/hexo搭建博客小记/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      hexo搭建博客小记
-    </a>
-  
-</nav>
-
-  
-
-  
-  <section id="comments" style='margin-top:10px'>
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-nodejs-学习笔记-二-fs-extra-module" data-title="nodejs 学习笔记(二)fs-extra module" data-url="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-    <script type="text/javascript">
-    var duoshuoQuery = {short_name:'raoxing'};
-      (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-      })();
-      </script>
-    <!-- 多说公共JS代码 end -->
-  </section>
-  
-
-  
 </article>
-
- </section>
+  
+  
+    </div></section>
+  
+</section>
         
           <aside id="sidebar">
   

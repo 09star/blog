@@ -4,7 +4,7 @@
   <subtitle><![CDATA[忧愁时就写一首诗 快乐时就唱一支歌]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://raoxing.me/"/>
-  <updated>2015-06-05T08:35:06.000Z</updated>
+  <updated>2015-06-06T03:48:38.000Z</updated>
   <id>http://raoxing.me/</id>
   
   <author>
@@ -15,11 +15,50 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[MacOS 搭建 OpenCV环境]]></title>
+    <link href="http://raoxing.me/2015/06/06/MacOs-%E6%90%AD%E5%BB%BA-OpenCv%E7%8E%AF%E5%A2%83/"/>
+    <id>http://raoxing.me/2015/06/06/MacOs-搭建-OpenCv环境/</id>
+    <published>2015-06-05T16:00:00.000Z</published>
+    <updated>2015-06-06T03:48:38.000Z</updated>
+    <content type="html"><![CDATA[<p>最近准备使用OpenCV做些追踪的研究，遂安装配置开发环境。</p>
+<h2 id="源码编译安装">源码编译安装</h2><p>具体参考了youtube 视频<a href="https://www.youtube.com/watch?v=37RvqZVddAw" target="_blank" rel="external">OpenCV Installation Tutorial Mac</a></p>
+<h3 id="1-_download_source_code">1. download source code</h3><h3 id="2-_install_cmake">2. install cmake</h3><pre>
+ brew install cmake
+</pre>
+
+<h3 id="3-_make_and_install">3. make and install</h3><p>在opencv 源码文件夹中创建一个build 文件夹</p>
+<pre>
+makedir build 
+cd build
+make -G 'Unix Makefiles' .. 
+等待
+make -j8
+等待
+sudo make install
+   </pre>
+
+<p>之前装过 2.4.11 之后有转换成3.0 在xcode build 报错<br>感谢<a href="http://blogs.wcode.org/2014/11/howto-setup-xcode-6-1-to-work-with-opencv-libraries/" target="_blank" rel="external">这篇post</a> 对xcode linker进行配置解决了问题。</p>
+<h2 id="参考资料">参考资料</h2><ol>
+<li><a href="https://www.youtube.com/watch?v=37RvqZVddAw" target="_blank" rel="external">OpenCV Installation Tutorial Mac</a></li>
+<li><a href="http://www.learnopencv.com/install-opencv-3-on-yosemite-osx-10-10-x/" target="_blank" rel="external">Install OpenCV 3 on OSX</a></li>
+<li><a href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/" target="_blank" rel="external">中文博客Develop Opencv on mac</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>最近准备使用OpenCV做些追踪的研究，遂安装配置开发环境。</p>
+<h2 id="源码编译安装">源码编译安装</h2><p>具体参考了youtube 视频<a href="https://www.youtube.com/watch?v=37RvqZVddAw" tar]]>
+    </summary>
+    
+      <category term="OpenCV" scheme="http://raoxing.me/tags/OpenCV/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[Angular学习笔记之几种常见的对话框总结]]></title>
     <link href="http://raoxing.me/2015/06/05/Angular%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%80%BB%E7%BB%93/"/>
     <id>http://raoxing.me/2015/06/05/Angular学习笔记之几种常见的对话框总结/</id>
     <published>2015-06-05T07:43:12.000Z</published>
-    <updated>2015-06-05T08:35:06.000Z</updated>
+    <updated>2015-06-06T03:39:51.000Z</updated>
     <content type="html"><![CDATA[<p>接触学习Angular这么长时间，项目里面经常碰到会使用弹出对话框（Modal或者Dialog）用起来简单使用，适合对象的创建，修改和提醒等操作。</p>
 <h2 id="1_UI_Bootstrap_的modal">1 UI Bootstrap 的modal</h2><p><a href="https://angular-ui.github.io/bootstrap/" target="_blank" rel="external">UI Bootstrap</a> 是AngularUI Team 用AngularJS 编写的 Bootstrap components. 所以常见的 bootstrap 组件都可以尝试在 UI Bootstrap中寻找.<br>大概样子如此。<br><img src="/2015/06/05/Angular学习笔记之几种常见的对话框总结/uiBootstrapModal.png"></p>
 <p>由于项目中会用到多个对话框，通常是使用angular 事件机制($broadcast/$on)来触发modal 的展示。所以一般架构是，view层，专门有个总的dialog.ejs(后台使用nodejs开发)里面以ng-template形式存储多个dialog</p>

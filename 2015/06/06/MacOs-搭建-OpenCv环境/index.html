@@ -3,38 +3,41 @@
 <head>
   <meta charset="utf-8">
   
-  <title>nodejs 学习笔记(二)fs-extra module | 星光灿烂的博客</title>
+  <title>MacOS 搭建 OpenCV环境 | 星光灿烂的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="接上篇nodejs 学习笔记(一)path 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。
-查询之后,发现可以使用 node fs-extra 来进行相应的操作
+  <meta name="description" content="最近准备使用OpenCV做些追踪的研究，遂安装配置开发环境。
+源码编译安装具体参考了youtube 视频OpenCV Installation Tutorial Mac
+1. download source code2. install cmake
+ brew install cmake
 
-var fse = require(&apos;fs-extra&apos;);
-var dest = &apos;path/to/dir&apos;;
 
-fse.ensureDir(dest,function(err){
-    co">
+3. make and install在opencv 源码文件夹中创建一个build 文件夹
+
+maked">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nodejs 学习笔记(二)fs-extra module">
-<meta property="og:url" content="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/index.html">
+<meta property="og:title" content="MacOS 搭建 OpenCV环境">
+<meta property="og:url" content="http://raoxing.me/2015/06/06/MacOs-搭建-OpenCv环境/index.html">
 <meta property="og:site_name" content="星光灿烂的博客">
-<meta property="og:description" content="接上篇nodejs 学习笔记(一)path 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。
-查询之后,发现可以使用 node fs-extra 来进行相应的操作
+<meta property="og:description" content="最近准备使用OpenCV做些追踪的研究，遂安装配置开发环境。
+源码编译安装具体参考了youtube 视频OpenCV Installation Tutorial Mac
+1. download source code2. install cmake
+ brew install cmake
 
-var fse = require(&apos;fs-extra&apos;);
-var dest = &apos;path/to/dir&apos;;
 
-fse.ensureDir(dest,function(err){
-    co">
+3. make and install在opencv 源码文件夹中创建一个build 文件夹
+
+maked">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nodejs 学习笔记(二)fs-extra module">
-<meta name="twitter:description" content="接上篇nodejs 学习笔记(一)path 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。
-查询之后,发现可以使用 node fs-extra 来进行相应的操作
+<meta name="twitter:title" content="MacOS 搭建 OpenCV环境">
+<meta name="twitter:description" content="最近准备使用OpenCV做些追踪的研究，遂安装配置开发环境。
+源码编译安装具体参考了youtube 视频OpenCV Installation Tutorial Mac
+1. download source code2. install cmake
+ brew install cmake
 
-var fse = require(&apos;fs-extra&apos;);
-var dest = &apos;path/to/dir&apos;;
 
-fse.ensureDir(dest,function(err){
-    co">
+3. make and install在opencv 源码文件夹中创建一个build 文件夹
+
+maked">
   
     <link rel="alternative" href="/atom.xml" title="星光灿烂的博客" type="application/atom+xml">
   
@@ -109,11 +112,11 @@ var _hmt = _hmt || [];
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-nodejs-学习笔记-二-fs-extra-module" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-MacOs-搭建-OpenCv环境" class="article article-type-post" itemscope itemprop="blogPost">
  
   <div class="article-meta">
-    <a href="/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" class="article-date">
-  <time datetime="2015-03-06T03:01:21.000Z" itemprop="datePublished">2015-03-06</time>
+    <a href="/2015/06/06/MacOs-搭建-OpenCv环境/" class="article-date">
+  <time datetime="2015-06-05T16:00:00.000Z" itemprop="datePublished">2015-06-06</time>
 </a>
     
   </div>
@@ -124,7 +127,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      nodejs 学习笔记(二)fs-extra module
+      MacOS 搭建 OpenCV环境
     </h1>
   
 
@@ -132,33 +135,37 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>接上篇<a href="http://raoxing.me/2015/03/05/nodejs-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80-path/" target="_blank" rel="external">nodejs 学习笔记(一)path</a> 生成指定路径之后，需要在程序启动时候去查看这个目录是否存在，如果不存在就创建这个目录。</p>
-<p>查询之后,发现可以使用 <a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="external">node fs-extra</a> 来进行相应的操作</p>
-<pre>
-var fse = require('fs-extra');
-var dest = 'path/to/dir';
-
-fse.ensureDir(dest,function(err){
-    console.log(err);
-})
+        <p>最近准备使用OpenCV做些追踪的研究，遂安装配置开发环境。</p>
+<h2 id="源码编译安装">源码编译安装</h2><p>具体参考了youtube 视频<a href="https://www.youtube.com/watch?v=37RvqZVddAw" target="_blank" rel="external">OpenCV Installation Tutorial Mac</a></p>
+<h3 id="1-_download_source_code">1. download source code</h3><h3 id="2-_install_cmake">2. install cmake</h3><pre>
+ brew install cmake
 </pre>
 
+<h3 id="3-_make_and_install">3. make and install</h3><p>在opencv 源码文件夹中创建一个build 文件夹</p>
+<pre>
+makedir build 
+cd build
+make -G 'Unix Makefiles' .. 
+等待
+make -j8
+等待
+sudo make install
+   </pre>
 
-
-
-<p>参考连接：</p>
-<ol>
-<li><a href="http://stackoverflow.com/questions/21194934/node-how-to-create-a-directory-if-doesnt-exist" target="_blank" rel="external">stackoverflow 问答</a></li>
-<li><a href="https://github.com/jprichardson/node-fs-extra" target="_blank" rel="external">fs-extra</a></li>
+<p>之前装过 2.4.11 之后有转换成3.0 在xcode build 报错<br>感谢<a href="http://blogs.wcode.org/2014/11/howto-setup-xcode-6-1-to-work-with-opencv-libraries/" target="_blank" rel="external">这篇post</a> 对xcode linker进行配置解决了问题。</p>
+<h2 id="参考资料">参考资料</h2><ol>
+<li><a href="https://www.youtube.com/watch?v=37RvqZVddAw" target="_blank" rel="external">OpenCV Installation Tutorial Mac</a></li>
+<li><a href="http://www.learnopencv.com/install-opencv-3-on-yosemite-osx-10-10-x/" target="_blank" rel="external">Install OpenCV 3 on OSX</a></li>
+<li><a href="http://hujiaweibujidao.github.io/blog/2014/03/13/develop-with-opencv-on-mac-os-x/" target="_blank" rel="external">中文博客Develop Opencv on mac</a></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" data-id="ciakhxhx90007vzq63ke9mqmg" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/06/06/MacOs-搭建-OpenCv环境/" data-id="ciakhxhxh000evzq6x9pszp42" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
 
     </footer>
   </div>
@@ -167,18 +174,10 @@ fse.ensureDir(dest,function(err){
     
 <nav id="article-nav" style='margin:10px 0px'>
   
-    <a href="/2015/03/06/nodewebkit-打包发布程序/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      
-        
-          nodewebkit 打包发布程序
-        
-    </a>
   
-  
-    <a href="/2015/03/06/hexo搭建博客小记/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/06/05/Angular学习笔记之几种常见的对话框总结/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      hexo搭建博客小记
+      Angular学习笔记之几种常见的对话框总结
     </a>
   
 </nav>
@@ -188,7 +187,7 @@ fse.ensureDir(dest,function(err){
   
   <section id="comments" style='margin-top:10px'>
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-nodejs-学习笔记-二-fs-extra-module" data-title="nodejs 学习笔记(二)fs-extra module" data-url="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/"></div>
+    <div class="ds-thread" data-thread-key="post-MacOs-搭建-OpenCv环境" data-title="MacOS 搭建 OpenCV环境" data-url="http://raoxing.me/2015/06/06/MacOs-搭建-OpenCv环境/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
