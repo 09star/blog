@@ -90,6 +90,71 @@ var _hmt = _hmt || [];
       <div class="outer">
         <section id="main">
   
+    <article id="post-OpenCV学习之光流法跟踪物体C" class="article article-type-post" itemscope itemprop="blogPost">
+ 
+  <div class="article-meta">
+    <a href="/2015/06/23/OpenCV学习之光流法跟踪物体C/" class="article-date">
+  <time datetime="2015-06-23T15:18:24.000Z" itemprop="datePublished">2015-06-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/23/OpenCV学习之光流法跟踪物体C/">OpenCV学习之光流法跟踪物体C++</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>光流法（Optical Flow）早在1950年就<a href="https://en.wikipedia.org/wiki/Optical_flow" target="_blank" rel="external">提出</a></p>
+<p>光流法具体实现有很多，OpenCV中就有</p>
+<ol>
+<li>calcOpticalFlowPyrLK</li>
+<li>calcOpticalFlowFarneback</li>
+</ol>
+<p>本篇主要展示使用稠密光流法calcOpticalFlowFarneback展现一个完整的视频追踪例子。</p>
+<h3 id="主要目的">主要目的</h3><p>使用OpenCV calcOpticalFlowFarneback方法进行物体的跟踪。</p>
+<h3 id="思路">思路</h3><ol>
+<li>使用光流法计算光流</li>
+<li>过滤光流，找到光流聚集的位置</li>
+<li>通过光流点，生成mask 图像，使用find contours方法找到运动物体边缘</li>
+<li>使用矩形等框出物体</li>
+</ol>
+<p>代码效果图：<br><img src="/2015/06/23/OpenCV学习之光流法跟踪物体C/result.png"></p>
+<h3 id="代码">代码</h3><h4 id="主要部分代码">主要部分代码</h4><figure class="highlight cpp"><figcaption><span>[C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> Created by starsplendid on 15/6/18.</span><br><span class="line"> Copyright (c) 2015年 starsplendid. All rights reserved.</span><br><span class="line"> 代码基础来源：http://blog.sina.com.cn/s/blog_662c78590100yyeg.html</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "opencv2/video/tracking.hpp"</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "opencv2/imgproc/imgproc.hpp"</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> "opencv2/highgui/highgui.hpp"</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;opencv2/opencv.hpp&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;iostream&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> &lt;fstream&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其他函数，见下部分</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">    Mat prevgray, gray, flow, cflow, frame,binaryPic,binaryPic2;</span><br><span class="line">    <span class="stl_container"><span class="built_in">vector</span>&lt;<span class="stl_container"><span class="built_in">vector</span>&lt;Point&gt;</span> &gt;</span> contours;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">VideoCapture <span class="title">cap</span><span class="params">("out.avi")</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (!cap.isOpened())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt; <span class="string">"Error Acquireing video feed\n"</span>;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (cap.get(CV_CAP_PROP_POS_FRAMES)&lt; cap.get(CV_CAP_PROP_FRAME_COUNT)-<span class="number">1</span>) &#123;</span><br><span class="line">            cap&gt;&gt;frame;</span><br><span class="line">            cvtColor(frame, gray, CV_BGR2GRAY);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (prevgray.data)</span><br><span class="line">            &#123;</span><br><span class="line">                calcOpticalFlowFarneback(prevgray, gray, flow, <span class="number">0.5</span>, <span class="number">3</span>,<span class="number">15</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">1.2</span>, <span class="number">0</span>);</span><br><span class="line">                cvtColor(prevgray, cflow, CV_GRAY2RGB);</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">float</span> diff_XY= <span class="number">0.0</span> ;</span><br><span class="line">                <span class="comment">// 用来计算平均 flow 速度</span></span><br><span class="line">                <span class="keyword">int</span> numOfSelectedPoint = <span class="number">0</span> ;</span><br><span class="line">                <span class="keyword">float</span> sumX = <span class="number">0.0</span> ;</span><br><span class="line">                <span class="keyword">float</span> sumY = <span class="number">0.0</span> ;</span><br><span class="line">                </span><br><span class="line">                binaryPic = Mat::zeros(prevgray.size(), prevgray.type());</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; cflow.rows; y += <span class="number">10</span> )</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; cflow.cols; x += <span class="number">10</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        Point2f fxy = flow.at&lt;Point2f&gt;(y, x);</span><br><span class="line">                        <span class="comment">/*</span><br><span class="line">                         选取光流明显的点</span><br><span class="line">                         */</span></span><br><span class="line">                        diff_XY =<span class="built_in">abs</span>(fxy.x)+<span class="built_in">abs</span>(fxy.y);</span><br><span class="line">                        <span class="keyword">if</span> (diff_XY &gt; <span class="number">6</span>) &#123;</span><br><span class="line">                            binaryPic.at&lt;uchar&gt;(y,x) = <span class="number">128</span> ;</span><br><span class="line">                            </span><br><span class="line">                            numOfSelectedPoint++ ;</span><br><span class="line">                            sumX += fxy.x  ;</span><br><span class="line">                            sumY += fxy.y  ;</span><br><span class="line">                        &#125;</span><br><span class="line">                        </span><br><span class="line">                        arrowedLine(cflow, Point(x, y), Point(cvRound(x+fxy.x), cvRound(y+fxy.y)), CV_RGB(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>));</span><br><span class="line">                        </span><br><span class="line">                        circle(cflow, Point(x,y), <span class="number">2</span>, CV_RGB(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>), -<span class="number">1</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                Mat dilateElement = getStructuringElement( MORPH_RECT,Size(<span class="number">10</span>,<span class="number">10</span>));</span><br><span class="line">                </span><br><span class="line">                dilate(binaryPic,binaryPic2,dilateElement);</span><br><span class="line">                <span class="comment">// binaryPic2 to binary</span></span><br><span class="line">                threshold(binaryPic2, binaryPic2, <span class="number">127.0</span>, <span class="number">255.0</span>, THRESH_BINARY);</span><br><span class="line">         </span><br><span class="line">                drawBiggestContours(binaryPic2,cflow,sumX/numOfSelectedPoint,sumY/numOfSelectedPoint);</span><br><span class="line">                </span><br><span class="line">                </span><br><span class="line">                imshow(<span class="string">"FLOW"</span>, cflow);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (waitKey(<span class="number">100</span>) &gt;= <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            swap(prevgray, gray);</span><br><span class="line">        &#125;</span><br><span class="line">        cap.release();</span><br><span class="line">     </span><br><span class="line">    &#125; <span class="keyword">while</span> (<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="其余部分函数">其余部分函数</h5><figure class="highlight cpp"><figcaption><span>[C++]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">intToString</span><span class="params">(<span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    std::<span class="built_in">stringstream</span> ss;</span><br><span class="line">    ss &lt;&lt; number;</span><br><span class="line">    <span class="keyword">return</span> ss.str();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">floatToString</span><span class="params">(<span class="keyword">float</span> number)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    std::<span class="built_in">stringstream</span> ss;</span><br><span class="line">    ss &lt;&lt; number;</span><br><span class="line">    <span class="keyword">return</span> ss.str();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">drawBiggestContours</span><span class="params">(Mat&amp; inputMat,Mat&amp; orignialMat,<span class="keyword">float</span> vx , <span class="keyword">float</span> vy)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> largest_area=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> largest_contour_index=<span class="number">0</span>;</span><br><span class="line">    Rect bounding_rect;</span><br><span class="line">    <span class="stl_container"><span class="built_in">vector</span>&lt;<span class="stl_container"><span class="built_in">vector</span>&lt;Point&gt;</span>&gt;</span> contours; <span class="comment">// Vector for storing contour</span></span><br><span class="line">    <span class="stl_container"><span class="built_in">vector</span>&lt;Vec4i&gt;</span> hierarchy;</span><br><span class="line"></span><br><span class="line">    findContours( inputMat, contours, hierarchy,CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE ); <span class="comment">// Find the contours in the image</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i&lt; contours.size(); i++ ) <span class="comment">// iterate through each contour.</span></span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">double</span> a=contourArea( contours[i],<span class="keyword">false</span>);<span class="comment">//  Find the area of contour</span></span><br><span class="line">       <span class="keyword">if</span>(a&gt;largest_area)&#123;</span><br><span class="line">             largest_area=a;</span><br><span class="line">             largest_contour_index=i;<span class="comment">//Store the index of largest contour</span></span><br><span class="line">             bounding_rect=boundingRect(contours[i]); <span class="comment">// Find the bounding rectangle for biggest contour</span></span><br><span class="line">           &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">Scalar <span class="title">color</span><span class="params">( 255,255,255)</span></span>;</span><br><span class="line">    drawContours( orignialMat, contours,largest_contour_index, color, <span class="number">1</span>, <span class="number">8</span>, hierarchy ); <span class="comment">// Draw the largest contour using previously stored index.</span></span><br><span class="line">    rectangle(orignialMat, bounding_rect,Scalar(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),<span class="number">2</span>, <span class="number">8</span>,<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 画中心点，并且标注速度 参考:http://docs.opencv.org/doc/tutorials/imgproc/shapedescriptors/moments/moments.html</span></span><br><span class="line">    <span class="function">Scalar <span class="title">color1</span><span class="params">(0,0,255)</span></span>;</span><br><span class="line">    Moments mu = moments(contours[largest_contour_index],<span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">float</span> x  = mu.m10/mu.m00;</span><br><span class="line">    <span class="keyword">float</span> y =mu.m01/mu.m00 ;</span><br><span class="line">    circle( orignialMat, Point2f(x , y ), <span class="number">4</span>,  CV_RGB(<span class="number">0</span>,<span class="number">255</span>,<span class="number">255</span>), -<span class="number">1</span>, <span class="number">8</span>, <span class="number">0</span> );</span><br><span class="line">    arrowedLine(orignialMat, Point2f(x, y), Point2f(x+vx, y+vy), CV_RGB(<span class="number">0</span>,<span class="number">255</span>,<span class="number">255</span>),<span class="number">2</span>);</span><br><span class="line">    </span><br><span class="line">    putText(orignialMat,<span class="string">"at ("</span>+intToString(x)+<span class="string">","</span>+intToString(y)+<span class="string">") with vector ("</span>+floatToString(vx)+<span class="string">","</span>+floatToString(vy)+<span class="string">")"</span>,bounding_rect.br(),<span class="number">1</span>,<span class="number">1</span>,Scalar(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="参考资料">参考资料</h3><ol>
+<li><a href="http://docs.opencv.org/doc/tutorials/imgproc/shapedescriptors/moments/moments.html" target="_blank" rel="external">Moments 找中心点</a></li>
+<li><a href="http://harismoonamkunnu.blogspot.com/2013/06/opencv-find-biggest-contour-using-c.html" target="_blank" rel="external">找最大的contour</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://raoxing.me/2015/06/23/OpenCV学习之光流法跟踪物体C/" data-id="cib9i9zs1000ek5q6tqpwdrrk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/光流法/">光流法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跟踪/">跟踪</a></li></ul>
+
+    </footer>
+  </div>
+
+  
+
+  
+
+  
+</article>
+
+ 
+  
     <article id="post-MacOs-搭建-OpenCv环境" class="article article-type-post" itemscope itemprop="blogPost">
  
   <div class="article-meta">
@@ -140,7 +205,7 @@ sudo make install
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/06/06/MacOs-搭建-OpenCv环境/" data-id="ciakhxhxh000evzq6x9pszp42" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/06/06/MacOs-搭建-OpenCv环境/" data-id="cib9i9zs5000lk5q66gci065l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
@@ -193,7 +258,7 @@ sudo make install
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/06/05/Angular学习笔记之几种常见的对话框总结/" data-id="ciakhxhxl000fvzq61exacax3" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/06/05/Angular学习笔记之几种常见的对话框总结/" data-id="cib9i9zs7000nk5q6l73y8bpy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJs/">AngularJs</a></li></ul>
@@ -257,7 +322,7 @@ sudo make install
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/10/mac-php开发工具及环境配置/" data-id="ciakhxhxw000ivzq62n18m219" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/10/mac-php开发工具及环境配置/" data-id="cib9i9zse000qk5q6m9eggt2y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mamp/">mamp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
@@ -317,7 +382,7 @@ sudo make install
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/" data-id="ciakhxhy0000nvzq693e1refe" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/" data-id="cib9i9zsg000vk5q6eqnpsna5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LAMP/">LAMP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
@@ -370,7 +435,7 @@ sudo make install
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/06/nodewebkit-打包发布程序/" data-id="ciakhxhwu0000vzq6l4s4rswq" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/06/nodewebkit-打包发布程序/" data-id="cib9i9zri0000k5q64hwd4f1a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-webkit/">node-webkit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nwjs/">nwjs</a></li></ul>
@@ -433,7 +498,7 @@ fse.ensureDir(dest,function(err){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" data-id="ciakhxhx90007vzq63ke9mqmg" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/06/nodejs-学习笔记-二-fs-extra-module/" data-id="cib9i9zru0007k5q6tlua6bsj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -491,7 +556,7 @@ fse.ensureDir(dest,function(err){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/06/hexo搭建博客小记/" data-id="ciakhxhxd000bvzq6a83d3z3n" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/06/hexo搭建博客小记/" data-id="cib9i9zrz000bk5q6csxzhyou" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -545,7 +610,7 @@ fse.ensureDir(dest,function(err){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/" data-id="ciakhxhxb0009vzq6dwzmuupu" class="article-share-link">Share</a>
+      <a data-url="http://raoxing.me/2015/03/05/nodejs-学习笔记-一-path/" data-id="cib9i9zrw0009k5q674jzk2lh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -573,7 +638,7 @@ fse.ensureDir(dest,function(err){
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/">LAMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mamp/">mamp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-webkit/">node-webkit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nwjs/">nwjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LAMP/">LAMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mamp/">mamp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node-webkit/">node-webkit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nwjs/">nwjs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/光流法/">光流法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跟踪/">跟踪</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -582,7 +647,7 @@ fse.ensureDir(dest,function(err){
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a><a href="/tags/LAMP/" style="font-size: 10px;">LAMP</a><a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/mamp/" style="font-size: 10px;">mamp</a><a href="/tags/node-webkit/" style="font-size: 10px;">node-webkit</a><a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a><a href="/tags/nwjs/" style="font-size: 10px;">nwjs</a><a href="/tags/php/" style="font-size: 10px;">php</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a><a href="/tags/LAMP/" style="font-size: 10px;">LAMP</a><a href="/tags/OpenCV/" style="font-size: 15px;">OpenCV</a><a href="/tags/hexo/" style="font-size: 10px;">hexo</a><a href="/tags/mamp/" style="font-size: 10px;">mamp</a><a href="/tags/node-webkit/" style="font-size: 10px;">node-webkit</a><a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a><a href="/tags/nwjs/" style="font-size: 10px;">nwjs</a><a href="/tags/php/" style="font-size: 10px;">php</a><a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a><a href="/tags/光流法/" style="font-size: 10px;">光流法</a><a href="/tags/跟踪/" style="font-size: 10px;">跟踪</a>
     </div>
   </div>
 
@@ -591,7 +656,7 @@ fse.ensureDir(dest,function(err){
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -601,6 +666,10 @@ fse.ensureDir(dest,function(err){
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/06/23/OpenCV学习之光流法跟踪物体C/">OpenCV学习之光流法跟踪物体C++</a>
+          </li>
         
           <li>
             <a href="/2015/06/06/MacOs-搭建-OpenCv环境/">MacOS 搭建 OpenCV环境</a>
@@ -616,10 +685,6 @@ fse.ensureDir(dest,function(err){
         
           <li>
             <a href="/2015/03/09/Ubuntu-14-04-配置LAMP开发环境/">Ubuntu 14.04 配置LAMP开发环境</a>
-          </li>
-        
-          <li>
-            <a href="/2015/03/06/nodewebkit-打包发布程序/">nodewebkit 打包发布程序</a>
           </li>
         
       </ul>
